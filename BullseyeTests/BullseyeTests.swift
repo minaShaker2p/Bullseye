@@ -1,12 +1,30 @@
 //
 
 import Testing
+import XCTest
 @testable import Bullseye
 
-struct BullseyeTests {
+final class BullseyeTests: XCTestCase {
+  var game : Game!
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    override func setUpWithError() throws {
+      game = Game()
     }
 
+    override func tearDownWithError() throws {
+      game = nil
+    }
+
+
+  func testScorePositvie(){
+    var guess = game.target + 5
+    var score =  game.points(sliderValue: guess)
+    XCTAssertEqual(score, 95)
+  }
+  
+  func testScoreNegative(){
+    var guess = game.target - 5
+    var score =  game.points(sliderValue: guess)
+    XCTAssertEqual(score, 95)
+  }
 }
